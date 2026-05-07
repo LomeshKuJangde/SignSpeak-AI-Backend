@@ -1,7 +1,6 @@
 flask
 flask-cors
-mediapipe==0.10.33
-numpy<2.0.0
-protobuf<4.0.0
+numpy
+joblib
 scikit-learn==1.7.2
 gunicorn
