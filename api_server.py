@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 import cv2
-import mediapipe as mp
 import numpy as np
 import joblib
 from pathlib import Path
@@ -37,7 +36,15 @@ print("Models loaded successfully")
 # -----------------------------
 # MEDIAPIPE SETUP
 # -----------------------------
-mp_hands = mp.solutions.hands
+try:
+    import mediapipe.solutions.hands as mp_hands
+except AttributeError:
+    # Fallback for some environments
+    from mediapipe.python.solutions import hands as mp_hands
+except ImportError:
+    # Final fallback
+    import mediapipe as mp
+    mp_hands = mp.solutions.hands
 
 # -----------------------------
 # FEATURE EXTRACTION HELPERS
